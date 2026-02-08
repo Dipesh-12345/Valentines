@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title> Valentine's Day</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Caveat:wght@400;700&family=EB+Garamond:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap and CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="img/Heart.jpg" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .response-image-wrap{display:flex;flex-direction:column;align-items:center;gap:0.5rem;}
+        .response-image{max-width:260px;width:100%;height:auto;object-fit:cover;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.15);transition:all .25s ease}
+        .response-image.expanded{max-width:100%;border-radius:6px}
+        .response-image-controls{display:flex;gap:0.5rem;align-items:center}
+        .vintage-btn-small{padding:0.35rem 0.6rem;font-size:0.85rem}
+        .vintage-btn-mini{padding:0.28rem 0.5rem;font-size:0.82rem;border-radius:6px}
+        .style-card{position:relative}
+        .emoji-btn{padding:0.28rem 0.45rem;font-size:0.95rem;border-radius:6px}
+        @keyframes floatBeat{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.06)}100%{transform:translateY(0) scale(1)}}
+        .emoji-btn.animate{animation:floatBeat 1.4s ease-in-out infinite}
+        .style-image{transition:transform .22s ease,box-shadow .22s ease}
+        .style-image.highlight{transform:scale(1.06);box-shadow:0 12px 30px rgba(0,0,0,0.12)}
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" src="Audio.mp3" loop autoplay muted></audio>
+    <header class="vintage-header">
+        <div class="paper-texture"></div>
+        <div class="decorative-border top-border"></div>
+        <div class="header-content">
+            <h1 class="vintage-title"> HAPPY VALENTINE'S DAY!</h1>
+            <p class="vintage-subtitle">You deserve all the love, laughter, and happiness this world can offer.</p>
+            <p class="tagline">
+May today remind you how special you are and how much you mean to those around you.
+</p>
+        </div>
+        <div class="decorative-border bottom-border"></div>
+    </header>
+    <nav class="vintage-nav">
+        <button id="audioToggle" class="vintage-btn romantic-example-btn">♫ Play Music</button>
+        <button id="quizToggle" class="vintage-btn good-design-btn">Some text game </button>
+        <button id="preferenceToggle" class="vintage-btn practice-section-btn">Love test game </button>
+        <button id="savedToggle" class="vintage-btn practice-section-btn">Saved Gifts</button>
+    </nav>
+    <main class="vintage-main container-fluid">
+        <!-- SECTION: FEATURE VIDEO -->
+        <section class="magazine-section video-section practice-section-content">
+            <div class="section-header">
+                <h2 class="section-title"> A Little Romantic Video</h2>
+                <p class="section-subtitle">A short video to set the mood ...</p>
+                <div class="ornament">❦</div>
+            </div>
+            <div class="video-wrap">
+                <video class="responsive-video" controls autoplay muted loop playsinline>
+                    <source src="video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+
+        <!-- SECTION : VALENTINE PROPOSAL -->
+        <section class="magazine-section proposal-section romantic-example-section">
+            <div class="section-header">
+                <h2 class="section-title">💝 A Special Request</h2>
+                <div class="ornament">✦</div>
+            </div>
+
+            <div class="proposal-container">
+                <div class="proposal-card">
+                    <h3 class="proposal-question">Will you be my Valentine?</h3>
+                    <p class="proposal-subtitle">This one day isn't enough to show you how much you mean to me...</p>
+                    <p class="proposal-message">
+                        Every moment with you is precious. You make my heart dance with joy. I want to spend every Valentine's Day celebrating you and the love we share. You are my greatest blessing. 💕
+                    </p>
+                    <p class="proposal-message">
+                        I promise to cherish you, make you smile, and love you more deeply each day. Your presence lights up my world. Will you accept my love and be my Valentine?
+                    </p>
+                    
+                    <div class="proposal-buttons" role="group" aria-label="proposal buttons">
+                        <button type="button" id="yesBtn" class="vintage-btn btn-yes romantic-example-btn">💕 Yes, I Accept!</button>
+                        <button type="button" id="noBtn" class="vintage-btn btn-no practice-section-btn">Not Yet</button>
+                    </div>
+
+                    <div id="yesResponse" class="response-modal" style="display:none;">
+                        <div class="modal-header vintage-modal-header">
+                            <h3 class="response-title">🎉 Accepted!</h3>
+                            <span class="close-btn" id="closeYesResponse">&times;</span>
+                        </div>
+                        <div class="modal-body" style="text-align:center; padding:1rem 1.25rem;">
+                            <p class="response-text" style="font-weight:700;margin-bottom:0.5rem;">🎉 You've made me the happiest person! 💝</p>
+                            <div class="response-content">
+                                <div class="response-image-wrap">
+                                    <img src="img/love.jpg" alt="Love" class="response-image" />
+                                    <div class="response-image-controls">
+                                        <button type="button" class="img-toggle-size vintage-btn vintage-btn-small">View Larger</button>
+                                        <a href="img/love.jpg" download class="vintage-btn vintage-btn-small">Download</a>
+                                    </div>
+                                </div>
+                                <p style="text-align:left;color:var(--charcoal);">Every moment with you is precious. You make my heart dance with joy. I want to spend every Valentine's Day celebrating you and the love we share. You are my greatest blessing. I promise to cherish you, make you smile, and love you more deeply each day. Your presence lights up my world.</p>
+                            </div>
+                            <div style="margin-top:1rem;">
+                                <button type="button" id="backHomeBtn" class="vintage-btn vintage-btn-secondary">← Back to Home</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="noResponse" class="response-modal" style="display:none;">
+                        <div class="modal-header vintage-modal-header">
+                            <h3 class="response-title">💔 Not Yet</h3>
+                            <span class="close-btn" id="closeNoResponse">&times;</span>
+                        </div>
+                        <div class="modal-body" style="text-align:center; padding:1rem 1.25rem;">
+                            <p class="response-text" style="font-weight:700;margin-bottom:0.5rem;">Aww, please reconsider! 💔</p>
+                            <div class="response-content">
+                                <div class="response-image-wrap">
+                                    <img src="img/sad.jpg" alt="Sad" class="response-image" />
+                                    <div class="response-image-controls">
+                                        <button type="button" class="img-toggle-size vintage-btn vintage-btn-small">View Larger</button>
+                                        <a href="img/sad.jpg" download class="vintage-btn vintage-btn-small">Download</a>
+                                    </div>
+                                </div>
+                                <p style="text-align:left;color:var(--charcoal);">My heart is broken... but I still believe in our love. If you're not ready, that's okay — we'll try again when the time feels right.</p>
+                            </div>
+                            <div style="margin-top:1rem; display:flex; gap:0.5rem; justify-content:center;">
+                                <button id="tryAgainBtn" class="vintage-btn btn-try-again">💕 Let me ask again...</button>
+                                <button id="closeNoResponseBtn" class="vintage-btn vintage-btn-secondary">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 1: LOVE LETTERS -->
+        <section class="magazine-section romantic-letters-section romantic-example-section">
+            <div class="section-header">
+                <h2 class="section-title">💕 Love Letters</h2>
+                <p class="section-subtitle">Timeless Words of Affection</p>
+                <div class="ornament">❦</div>
+            </div>
+            
+            <div class="letter-card romantic-example-card">
+                <div class="letter-border"></div>
+                <div class="letter-content">
+                    <p class="letter-text">Dearest <span id="recipientName">You</span>,</p>
+                    <p id="letterMessage" class="vintage-text">
+                        Every moment with you is like a page from the most beautiful love story ever written. Your smile is brighter than any star that graces the evening sky. I cherish every precious second we spend together.
+                    </p>
+                    <p class="letter-closing">With all my love,<br><span id="senderName">Dipesh</span></p>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <label style="display:block; margin-bottom:0.5rem; font-weight:700; color:var(--deep-burgundy);">Recipient Name</label>
+                    <input type="text" id="recipientInput" class="vintage-input" placeholder="Write recipient name..." />
+                </div>
+                <div class="col-md-6">
+                    <label style="display:block; margin-bottom:0.5rem; font-weight:700; color:var(--deep-burgundy);">Your Name</label>
+                    <input type="text" id="senderInput" class="vintage-input" placeholder="Write your name..." />
+                </div>
+                <div class="col-12 mt-3">
+                    <label style="display:block; margin-bottom:0.5rem; font-weight:700; color:var(--deep-burgundy);">Your Love Message</label>
+                    <textarea id="customMessage" class="vintage-input" rows="3" placeholder="Write your love message here..."></textarea>
+                    <div class="d-flex gap-2 mt-2">
+                        <button id="updateLetter" class="vintage-btn">Update Letter</button>
+                        <button id="downloadLetter" class="vintage-btn vintage-btn-small">📮 Download Postcard</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: VALENTINE GIFTS -->
+        <section class="magazine-section gifts-section good-design-section">
+            <div class="section-header">
+                <h2 class="section-title">🎁 Valentine Gifts</h2>
+                <p class="section-subtitle">Select the Perfect Present for Your Beloved</p>
+                <div class="ornament">❦</div>
+            </div>
+
+                <div class="gifts-manager">
+                <div class="manage-controls" style="margin-bottom:1.25rem;">
+                    <label style="display:block;margin-bottom:0.4rem;font-weight:700;color:var(--deep-burgundy);">My Gifts</label>
+                    <div class="row g-2 align-items-end" style="margin-top:0.5rem;">
+                        <div class="col-md-6">
+                            <input id="giftTitleInput" class="vintage-input" placeholder="Gift title (required)" />
+                        </div>
+                        <div class="col-md-4">
+                            <input type="file" id="giftImageInput" accept="image/*" />
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" id="addGiftFormBtn" class="vintage-btn vintage-btn-mini">Add Gift</button>
+                        </div>
+                    </div>
+                    <p class="vintage-text" style="margin:0;color:var(--charcoal); margin-top:0.6rem;">Add personal gifts. Images are optional.</p>
+                </div>
+
+                <div id="giftsGrid" class="gifts-grid">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: ROMANTIC STYLES -->
+        <section class="magazine-section styles-section practice-section-content">
+            <div class="section-header">
+                <h2 class="section-title">✨ Some Funny Picture </h2>
+                <p class="section-subtitle">It a collection of funny picture </p>
+                <div class="ornament">❦</div>
+            </div>
+
+            <div class="styles-grid">
+                <div class="style-card romantic-example-card-style">
+                    <img src="img/doggy.jpg" alt="Romantic Style 1" class="style-image romantic-example-photo" />
+                    
+                    <h4 class="style-title">Accept this flower</h4>
+                    <p class="style-desc">Baby take it  </p>
+                </div>
+
+                <div class="style-card romantic-example-card-style">
+                    <img src="img/cat.jpg" alt="Romantic Style 2" class="style-image romantic-example-photo" />
+                    
+                    <h4 class="style-title">Baby</h4>
+                    <p class="style-desc"> I love you baby </p>
+                </div>
+
+                <div class="style-card romantic-example-card-style">
+                    <img src="img/sunny.jpg" alt="Romantic Style 3" class="style-image romantic-example-photo" />
+                    
+                    <h4 class="style-title">Oo dear </h4>
+                    <p class="style-desc">My sweetheart</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: PHOTO GALLERY -->
+        <section class="magazine-section gallery-section romantic-example-section">
+            <div class="section-header">
+                <h2 class="section-title">📸 Moments of Love</h2>
+                <p class="section-subtitle">Click to Share Your Feelings</p>
+                <div class="ornament">❦</div>
+            </div>
+
+            <div class="vintage-gallery">
+                <!-- Gallery uploader: user can add picture + caption -->
+                <div class="gallery-uploader">
+                    <label class="vintage-label" style="font-weight:700; margin-bottom:0.25rem; display:block;">Upload a photo</label>
+                    <input type="file" id="galleryUpload" accept="image/*" />
+                    <img id="galleryPreview" src="" alt="Preview" style="display:none; max-height:160px; object-fit:cover; margin-top:0.5rem; border-radius:8px; box-shadow:0 8px 20px rgba(0,0,0,0.08);" />
+                    <div class="d-flex gap-2 mt-2">
+                        <textarea id="galleryCaption" rows="3" class="flex-grow-1" placeholder="Write something about your moment..."></textarea>
+                        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                            <button id="addGalleryBtn" class="vintage-btn vintage-btn-mini romantic-example-btn" disabled>Add</button>
+                            <button id="galleryClearBtn" class="vintage-btn vintage-btn-secondary" type="button" style="display:none;">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="galleryGrid" class="gallery-row">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: FEATURED COUPLE -->
+        <section class="magazine-section featured-section good-design-section">
+            <div class="section-header">
+                <h2 class="section-title">💫 Write something about your.......</h2>
+                <div class="ornament">❦</div>
+            </div>
+
+            <div class="featured-layout">
+                <div class="featured-image">
+                    <img src="img/rabbit.jpg" alt="Featured" class="featured-photo" />
+                </div>
+                <div class="featured-text">
+                    <h3 class="featured-name" id="coupleName">A Special Love Story</h3>
+                    <p class="featured-story" id="coupleStory">
+                       On this Valentine’s Day, I just want you to know how much you mean to me—you’re not only my girlfriend but also my best friend, my safe place, and my favorite person to laugh with. Every heartbeat whispers your name, and every star reminds me of your light; you’ve transformed my world into something beautiful and endless. Thank you for your kindness, your laughter, and the way you always make ordinary days extraordinary—I’m so lucky to walk through life with you. You’re my fire, my muse, my forever Valentine, and I love the way you challenge me, inspire me, and make me believe in us more every single day. You’re my favorite adventure, my favorite smile, and yes, my favorite person to steal hoodies and fries from. So here’s to more laughs, more hugs, more late-night snacks, and more memories together—because with you, every day feels like Valentine’s Day
+                    </p>
+                    <blockquote class="love-quote">"Love is not just something we feel. It is something we do." –By author </blockquote>
+                </div>
+            </div>  
+        </section>
+        <footer class="vintage-footer">
+            <p class="vintage-text-center">❦ Enjoy your Valentine's Day ❦</p>
+            <p class="vintage-text-center footer-credit"> It a sepcial Day where love is celebrated!</p>
+        </footer>
+    </main>
+    <div id="featuredModal" class="vintage-modal">
+        <div class="modal-content vintage-modal-content">
+            <div class="modal-header vintage-modal-header">
+                <h3>Edit Featured</h3>
+                <span class="close-btn" id="closeFeaturedModal">&times;</span>
+            </div>
+            <div class="modal-body vintage-modal-body">
+                <label style="font-weight:700; display:block; margin-bottom:0.5rem;">Choose image</label>
+                <input type="file" id="featuredUpload" accept="image/*" />
+                <img id="featuredPreview" src="" alt="Preview" class="modal-image mt-3" style="max-height:260px; object-fit:cover;" />
+                <textarea id="featuredTextEdit" class="vintage-input mt-3" rows="5" placeholder="Write something about this..."></textarea>
+            </div>
+            <div class="modal-footer vintage-modal-footer">
+                <button id="featuredSave" class="vintage-btn good-design-btn">Save</button>
+                <button id="featuredCancel" class="vintage-btn vintage-btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <div id="styleEditModal" class="vintage-modal">
+        <div class="modal-content vintage-modal-content">
+            <div class="modal-header vintage-modal-header">
+                <h3>Edit Picture</h3>
+                <span class="close-btn" id="closeStyleModal">&times;</span>
+            </div>
+            <div class="modal-body vintage-modal-body">
+                <label style="font-weight:700; display:block; margin-bottom:0.5rem;">Choose image</label>
+                <input type="file" id="styleUpload" accept="image/*" />
+                <img id="stylePreview" src="" alt="Preview" class="modal-image mt-3" style="max-height:320px; object-fit:cover;" />
+                <div style="margin-top:0.5rem;"><button id="styleChangeBtn" class="vintage-btn" type="button">Change Photo</button></div>
+                <input id="styleTitleEdit" class="vintage-input mt-3" placeholder="Title" />
+                <textarea id="styleDescEdit" class="vintage-input mt-3" rows="4" placeholder="Write something about this..."></textarea>
+            </div>
+            <div class="modal-footer vintage-modal-footer">
+                <button id="styleSave" class="vintage-btn good-design-btn">Save</button>
+                <button id="styleCancel" class="vintage-btn vintage-btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saved Gifts Modal -->
+    <div id="savedModal" class="vintage-modal">
+        <div class="modal-content vintage-modal-content">
+            <div class="modal-header vintage-modal-header">
+                <h3>Saved Gifts</h3>
+                <span class="close-btn" id="closeSavedModal">&times;</span>
+            </div>
+            <div class="modal-body vintage-modal-body" id="savedModalBody">
+                <div id="savedList" class="gifts-grid">
+                    <!-- saved favorites render here -->
+                </div>
+            </div>
+            <div class="modal-footer vintage-modal-footer">
+                <button id="savedClose" class="vintage-btn vintage-btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Details Modal -->
+    <div id="giftDetailsModal" class="vintage-modal">
+        <div class="modal-content vintage-modal-content">
+            <div class="modal-header vintage-modal-header">
+                <h3 id="giftDetailsTitle">Gift Details</h3>
+                <span class="close-btn" id="closeGiftDetailsModal">&times;</span>
+            </div>
+            <div class="modal-body vintage-modal-body" style="text-align:center;">
+                <div id="giftDetailsIcon" style="font-size:5rem; margin:1rem 0;">💝</div>
+                <h2 id="giftDetailsName" style="color:var(--deep-burgundy); margin:1rem 0;"></h2>
+                <p id="giftDetailsDesc" style="font-size:1rem; color:var(--charcoal); margin:1rem 0;"></p>
+            </div>
+            <div class="modal-footer vintage-modal-footer">
+                <button id="closeGiftDetailsBtn" class="vintage-btn vintage-btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div id="messageModal" class="vintage-modal">
+        <div class="modal-content vintage-modal-content">
+            <div class="modal-header vintage-modal-header">
+                <h3>Share Your Feelings</h3>
+                <span class="close-btn" id="closeModal">&times;</span>
+            </div>
+                <div class="modal-body vintage-modal-body">
+                <img id="modalImage" src="" alt="" class="modal-image" style="max-height:360px; object-fit:cover; border-radius:8px;" />
+                <div style="margin-top:0.5rem; font-weight:700; color:var(--deep-burgundy);">Caption: <span id="modalCurrentCaption">-</span></div>
+                <input type="file" id="modalImageUpload" accept="image/*" style="display:none" />
+                <div style="margin-top:0.5rem;"><button id="modalChangeBtn" class="vintage-btn" type="button">Change Photo</button></div>
+                <textarea id="modalMessage" class="vintage-input mt-3" rows="4" placeholder="Write your message..."></textarea>
+                <div class="emoji-row mt-3">
+                    <button class="emoji-btn">❤️</button>
+                    <button class="emoji-btn">💕</button>
+                    <button class="emoji-btn">💖</button>
+                    <button class="emoji-btn">😍</button>
+                    <button class="emoji-btn">🌹</button>
+                </div>
+            </div>
+            <div class="modal-footer vintage-modal-footer">
+                <button id="modalSend" class="vintage-btn">Send Message</button>
+                <button id="modalClose" class="vintage-btn vintage-btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Modal -->
+    <div id="quizModal" class="vintage-modal">
+        <div class="modal-content vintage-modal-content">
+            <div class="modal-header vintage-modal-header">
+                <h3>Random Question Ask Game</h3>
+                <span class="close-btn" id="closeQuizModal">&times;</span>
+            </div>
+            <div class="modal-body vintage-modal-body">
+                <div id="gameStart">
+                    <p class="vintage-text">Welcome to the random question ask  Game — answer quickly to score more points!</p>
+                    <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;">
+                        <button id="gameStartBtn" class="vintage-btn romantic-example-btn">Start Game</button>
+                        <button id="gameHowBtn" class="vintage-btn vintage-btn-secondary">How to Play</button>
+                    </div>
+                </div>
+
+                    
+
+                <div id="gameBoard" style="display:none;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+                        <div>Question <span id="gameIndex">0</span>/<span id="gameTotal">0</span></div>
+                        <div>Time: <span id="gameTimer">0</span>s</div>
+                        <div>Score: <strong id="gameScore">0</strong></div>
+                    </div>
+                    <div id="gameQuestion" style="font-weight:700;margin-bottom:0.75rem;"></div>
+                    <div id="gameChoices" style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;"></div>
+                    <div style="margin-top:0.75rem;text-align:right;display:flex;gap:0.5rem;justify-content:flex-end;">
+                        <button id="gameShowAnswerBtn" class="vintage-btn" style="display:none;">Show Answer</button>
+                        <button id="gameNextBtn" class="vintage-btn" disabled>Next</button>
+                    </div>
+                </div>
+                <div id="gameResult" style="display:none;text-align:center;">
+                    <h4 id="gameResultText"></h4>
+                    <p id="gameResultDetail"></p>
+                    <div style="display:flex;gap:0.5rem;justify-content:center;margin-top:1rem;">
+                        <button id="gameRestartBtn" class="vintage-btn romantic-example-btn">Play Again</button>
+                        <button id="gameCloseBtn" class="vintage-btn vintage-btn-secondary">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer vintage-modal-footer">
+                <small style="color:var(--charcoal);">Answer quickly — each remaining second adds to your score.</small>
+            </div>
+        </div>
+    </div>
+        <!-- Love Test Model -->
+        <div id="preferenceModal" class="vintage-modal">
+            <div class="modal-content vintage-modal-content" style="max-width:640px;">
+                <div class="modal-header vintage-modal-header">
+                    <h3>Love Tester — Find Real Love</h3>
+                    <span class="close-btn" id="closePreferenceModal">&times;</span>
+                </div>
+                <div class="modal-body vintage-modal-body" style="text-align:center;">
+                    <div id="prefStart">
+                        <p class="vintage-text">Enter two names and we'll calculate a playful compatibility score. Try it with yours and your crush!</p>
+                        <div style="display:flex;gap:0.5rem;justify-content:center;margin-top:1rem;">
+                            <input id="prefNameA" class="vintage-input" placeholder="Your name" style="max-width:220px;" />
+                            <input id="prefNameB" class="vintage-input" placeholder="Their name" style="max-width:220px;" />
+                        </div>
+                            <div style="margin-top:1rem;"><button id="prefTestBtn" class="vintage-btn romantic-example-btn">Test Love</button></div>
+                    </div>
+
+                    <div id="prefResultView" style="display:none;">
+                        <div style="margin:0.75rem 0;">
+                            <div style="position:relative;height:28px;background:linear-gradient(90deg,#fde2e2,#ffeef0);border-radius:999px;overflow:hidden;border:2px solid rgba(0,0,0,0.04);">
+                                <div id="prefMeterFill" style="height:100%;width:0%;background:linear-gradient(90deg,#ff7a7a,#ff3d6b);transition:width 0.6s ease;"></div>
+                            </div>
+                            <div style="margin-top:0.5rem;font-weight:700;font-size:1.2rem;">Compatibility: <span id="prefPercent">0</span>%</div>
+                            <div style="margin-top:0.75rem; display:flex;justify-content:center;align-items:center;gap:0.75rem;">
+                                <div id="prefHeart" style="font-size:2.3rem; line-height:1; width:72px; height:72px; display:flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(135deg,#fff0f2,#ffd6de);box-shadow:0 6px 18px rgba(0,0,0,0.06);">❤</div>
+                                <div id="prefRandomMessage" style="font-size:0.95rem;color:var(--deep-burgundy);max-width:320px;text-align:left;"></div>
+                            </div>
+                        </div>
+                        <div id="prefMessage" style="margin-top:0.5rem;color:var(--deep-burgundy);"></div>
+                        <div style="margin-top:1rem;display:flex;gap:0.5rem;justify-content:center;">
+                            <button id="prefTryAgain" class="vintage-btn">Try Another</button>
+                            <button id="prefCloseBtn" class="vintage-btn vintage-btn-secondary">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hearts particle canvas (visual enhancement) -->
+        <canvas id="heartsCanvas"></canvas>
+
+    <!-- html2canvas for postcard download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Cart and payment UI removed per user request -->
+
+    <script>
+        // Small helper to toggle response image size
+        document.addEventListener('click', function (e) {
+            const btn = e.target.closest('.img-toggle-size');
+            if (!btn) return;
+            const wrap = btn.closest('.response-image-wrap');
+            if (!wrap) return;
+            const img = wrap.querySelector('.response-image');
+            if (!img) return;
+            const expanded = img.classList.toggle('expanded');
+            btn.textContent = expanded ? 'View Smaller' : 'View Larger';
+        });
+
+        
+
+        // Add animation class to emoji buttons so they float
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.emoji-btn').forEach(b => b.classList.add('animate'));
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
